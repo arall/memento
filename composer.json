@@ -1,0 +1,24 @@
+{
+    "name": "arall/memento",
+    "description": "PHP CLI tool to store your memories",
+    "license": "MIT",
+    "keywords": ["memories", "memento"],
+    "authors": [
+        {
+            "name": "arall",
+            "email": "gerard.arall@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/console": "^2.7",
+        "illuminate/container": "~5.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.0.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Arall\\Memento\\": "src/Arall/Memento"
+        }
+    }
+}
