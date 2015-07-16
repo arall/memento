@@ -17,7 +17,7 @@ class Migrator
     {
         foreach (glob($this->source . '/*.php') as $migration) {
             require_once($migration);
-            $this->migrations[] = basename($migration, '.php');
+            $this->migrations[] = substr(basename($migration, '.php'), 18);
         }
     }
 

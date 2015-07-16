@@ -2,8 +2,9 @@
 
 use Arall\Memento\Contracts\Migration;
 use Lazer\Classes\Database as Lazer;
+use Lazer\Classes\Relation;
 
-class MemoryTableMigration implements Migration
+class MemoriesTableMigration implements Migration
 {
     public function run()
     {
@@ -11,5 +12,11 @@ class MemoryTableMigration implements Migration
             'id'   => 'integer',
             'text' => 'string',
         ));
+
+        Relation::table('memories')
+            ->hasMany('persons')
+            ->localKey('id')
+            ->foreignKey('id')
+            ->setRelation();
     }
 }
