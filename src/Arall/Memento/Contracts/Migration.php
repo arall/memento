@@ -4,5 +4,7 @@ namespace Arall\Memento\Contracts;
 
 interface Migration
 {
-    public function run();
+    public function up();
+
+    public function down();
 }

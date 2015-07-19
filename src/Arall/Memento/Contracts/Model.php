@@ -30,12 +30,15 @@ abstract class Model
      */
     public function __construct(array $attributes = array())
     {
-        $this->fields = $this->getConnector()->fields();
+        // Load database fields
+        $this->fields = $this->query()->fields();
+
+        // Fill attributes
         $this->fill($attributes);
     }
 
     /**
-     * Fill the model with an array of attributes.
+     * Fill the model's fillable fields with an array of attributes.
      *
      * @param array $attributes
      *
@@ -79,38 +82,25 @@ abstract class Model
         $this->attributes[$key] = $value;
     }
 
-    /**
-     * Returns a database row object pointing the model table, with all the attributes set.
-     *
-     * @return Lazer
-     */
-    protected function loadAttributes()
+    public function save()
     {
-        $row = $this->getConnector();
-        
+        $object = $this->query();
+
         if (count($this->attributes) > 0) {
             foreach ($this->attributes as $key => $value) {
-                $row->$key = $value;
+                $object->$key = $value;
             }
         }
 
-        return $row;
-    }
+        $object->save();
 
-    public function save()
-    {
-        $row = $this->loadAttributes();
-
-        return $row->save();
+        // Set id
+        $this->setAttribute('id', $object->id);
     }
 
     public function delete()
     {
-        $query = $this->getConnector();
-
-        return $query
-            ->find($this->id)
-            ->delete();
+        return $this->query()->find($this->id)->delete();
     }
 
     /**
@@ -118,8 +108,51 @@ abstract class Model
      *
      * @return Lazer
      */
-    protected function getConnector()
+    protected function query()
     {
         return Lazer::table($this->table);
+    }
+
+    public static function findOrCreate(array $attributes)
+    {
+        $object = new static();
+
+        $query = $object->query();
+        foreach ($object->fillableFromArray($attributes) as $key => $value) {
+            $query->where($key, '=', $value);
+        }
+
+        $row = $query->find();
+        
+        if (isset($row->id)) {
+            $object->fill((array)$row);
+        } else {
+            $object->fill($attributes);
+            $object->save();
+        }
+
+        return $object;
+    }
+
+    /**
+     * Returning variable from Object.
+     * @param  string $name Field name
+     * @return mixed  Field value
+     */
+    public function __get($name)
+    {
+        if (isset($this->attributes[$name])) {
+            return $this->attributes[$name];
+        }
+    }
+
+    /**
+     * Check if the given field exists.
+     * @param  string $name Field name
+     * @return bool   True if the field exists, false otherwise
+     */
+    public function __isset($name)
+    {
+        return isset($this->attributes[$name]);
     }
 }

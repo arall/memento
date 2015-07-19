@@ -2,12 +2,13 @@
 
 use Arall\Memento\Contracts\Migration;
 use Lazer\Classes\Database as Lazer;
+use Lazer\Classes\Relation;
 
-class PersonsTableMigration implements Migration
+class TagsTableMigration implements Migration
 {
     public function up()
     {
-        Lazer::create('persons', array(
+        Lazer::create('tags', array(
             'id'   => 'integer',
             'name' => 'string',
         ));
@@ -15,6 +16,6 @@ class PersonsTableMigration implements Migration
 
     public function down()
     {
-        Lazer::remove('persons');
+        Lazer::remove('tags');
     }
 }

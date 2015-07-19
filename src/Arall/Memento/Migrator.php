@@ -21,11 +21,17 @@ class Migrator
         }
     }
 
-    public function run()
+    public function run($force = false)
     {
         foreach ($this->migrations as $migration) {
             $migration = new $migration;
-            $migration->run();
+            if ($force) {
+                try {
+                    $migration->down();
+                } catch (\Lazer\Classes\LazerException $e) {
+                }
+            }
+            $migration->up();
         }
     }
 }

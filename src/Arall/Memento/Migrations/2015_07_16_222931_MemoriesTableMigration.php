@@ -6,7 +6,7 @@ use Lazer\Classes\Relation;
 
 class MemoriesTableMigration implements Migration
 {
-    public function run()
+    public function up()
     {
         Lazer::create('memories', array(
             'id'   => 'integer',
@@ -14,9 +14,20 @@ class MemoriesTableMigration implements Migration
         ));
 
         Relation::table('memories')
-            ->hasMany('persons')
+            ->hasAndBelongsToMany('persons')
             ->localKey('id')
             ->foreignKey('id')
             ->setRelation();
+
+        Relation::table('memories')
+            ->hasAndBelongsToMany('tags')
+            ->localKey('id')
+            ->foreignKey('id')
+            ->setRelation();
+    }
+
+    public function down()
+    {
+        Lazer::remove('memories');
     }
 }
