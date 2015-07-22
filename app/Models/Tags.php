@@ -2,7 +2,7 @@
 
 namespace app\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Model as Eloquent;
 
 class Tags extends Model
 {
@@ -11,7 +11,7 @@ class Tags extends Model
      *
      * @var string
      */
-    protected $table = 'tags';
+    protected $collection = 'tags';
 
     /**
      * The attributes that are mass assignable.

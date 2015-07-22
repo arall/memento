@@ -2,7 +2,7 @@
 
 namespace app\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Model as Eloquent;
 
 class Person extends Model
 {
@@ -11,7 +11,7 @@ class Person extends Model
      *
      * @var string
      */
-    protected $table = 'persons';
+    protected $collection = 'persons';
 
     /**
      * The attributes that are mass assignable.

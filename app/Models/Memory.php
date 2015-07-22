@@ -2,7 +2,7 @@
 
 namespace app\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Model as Eloquent;
 
 class Memory extends Model
 {
@@ -11,7 +11,7 @@ class Memory extends Model
      *
      * @var string
      */
-    protected $table = 'memories';
+    protected $collection = 'memories';
 
     /**
      * The attributes that are mass assignable.
