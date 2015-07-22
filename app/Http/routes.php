@@ -12,9 +12,13 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
-Route::resource('memory',    'MemoryController');
-Route::resource('tag',        'TagController');
-Route::resource('person',    'PersonController');
+Route::group(['prefix' => 'api'], function () {
+    // Auth
+    Route::post('authenticate', 'AuthController@authenticate');
+
+    // Memories
+    Route::resource('memory', 'MemoryController');
+});

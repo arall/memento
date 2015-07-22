@@ -3,12 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\Memory;
+use Auth;
 
 class MemoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('jwt.auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +21,7 @@ class MemoryController extends Controller
      */
     public function index()
     {
-        //
+        return Memory::all();
     }
 
     /**
@@ -26,7 +31,16 @@ class MemoryController extends Controller
      */
     public function create()
     {
-        //
+        $memory =  new Memory([
+            'title' => Input::get('title'),
+            'text' => Input::get('text'),
+        ]);
+
+        $memory->user()->associate(Auth::user());
+
+        $memory->save();
+
+        return $memory;
     }
 
     /**
@@ -43,7 +57,7 @@ class MemoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int      $id
      * @return Response
      */
     public function show($id)
@@ -54,7 +68,7 @@ class MemoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int      $id
      * @return Response
      */
     public function edit($id)
@@ -66,7 +80,7 @@ class MemoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  Request  $request
-     * @param  int  $id
+     * @param  int      $id
      * @return Response
      */
     public function update(Request $request, $id)
@@ -77,7 +91,7 @@ class MemoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int      $id
      * @return Response
      */
     public function destroy($id)
