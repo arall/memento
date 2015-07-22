@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('memory',    'MemoryController');
+Route::resource('tag',        'TagController');
+Route::resource('person',    'PersonController');
