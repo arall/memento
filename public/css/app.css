@@ -1,0 +1,39 @@
+.Dashboard-Container li {
+  line-height: 26px;
+}
+
+.Footer-Container {
+  background-color: #ececec;
+  margin-top: 60px;
+  padding: 30px 0;
+  text-align: center;
+  width: 100%;
+}
+
+.Landing-Container {
+  max-width: 400px;
+  margin: 0 auto 0 auto;
+}
+.Landing-CallToAction {
+  text-align: center;
+}
+.Landing-flex {
+  min-height: 50px;
+  padding: 5px;
+  color: white;
+}
+.Landing-flex33 {
+  background-color: #009688;
+}
+.Landing-flex55 {
+  background-color: #3949ab;
+}
+.Landing-flexRemaining {
+  background-color: #9c27b0;
+}
+.Landing-demoIcon {
+  fill: #009688;
+  position: relative;
+  top: 4px;
+  left: 5px;
+}

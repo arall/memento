@@ -1,6 +1,6 @@
 /vendor
 /node_modules
-Homestead.yaml
 .env
-.DS_Store
-tests/_output/*
+/bower_components
+npm-debug.log
+.idea/

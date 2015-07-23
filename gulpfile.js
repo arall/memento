@@ -1,4 +1,9 @@
+process.env.DISABLE_NOTIFIER = true;
 var elixir = require('laravel-elixir');
+
+require('laravel-elixir-bower');
+require('laravel-elixir-angular');
+require('laravel-elixir-imagemin');
 
 /*
  |--------------------------------------------------------------------------
@@ -6,16 +11,21 @@ var elixir = require('laravel-elixir');
  |--------------------------------------------------------------------------
  |
  | Elixir provides a clean, fluent API for defining some basic Gulp tasks
- | for your Laravel application. By default, we are compiling the Sass
+ | for your Laravel application. By default, we are compiling the Less
  | file for our application, as well as publishing vendor resources.
  |
  */
 
-elixir(function(mix) {
-    //mix.sass('app.scss');
+ elixir.config.sourcemaps = false;
+ elixir.config.registerWatcher("default", "angular/**");
 
-    // Application Scripts
-    mix.scripts([
-        '../../../resources/scripts/app.js'
-    ], 'public/js/app.js');
-});
+ elixir(function(mix) {
+ 	mix
+ 	//.bower() //uncomment it when you add a new bower component (it's commented now because it messes up the other watchers)
+ 	.angular('angular/')
+ 	.less('../../../angular/**/*.less')
+ 	.copy('angular/app/**/*.html', 'public/views/app/')
+ 	.copy('angular/directives/**/*.html', 'public/views/directives/');
+ 	// .imagemin();
+
+ });

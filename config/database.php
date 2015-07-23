@@ -50,8 +50,8 @@ return [
             'driver'   => 'mongodb',
             'host'     => env('DB_HOST', 'localhost'),
             'port'     => 27017,
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
+            'database' => env('DB_DATABASE', 'memento'),
+            'username' => env('DB_USERNAME', 'admin'),
             'password' => env('DB_PASSWORD', ''),
         ),
 

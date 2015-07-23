@@ -147,6 +147,7 @@ return [
         /**
          * 3rd party.
          */
+        Barryvdh\Debugbar\ServiceProvider::class,
         Jenssegers\Mongodb\MongodbServiceProvider::class,
         Jenssegers\Mongodb\Auth\PasswordResetServiceProvider::class,
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
@@ -202,6 +203,7 @@ return [
         /**
          * 3rd party.
          */
+        'Debugbar'   => Barryvdh\Debugbar\Facade::class,
         'JWTAuth'    => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
 
