@@ -16,11 +16,13 @@ Route::get('/', 'AngularController@serveApp');
 
 Route::group(['prefix' => 'api/v1/'], function () {
 
-    // Auth
-    Route::resource('authenticate', 'AuthenticateController', ['only' => ['index']]);
-    Route::post('authenticate', 'AuthenticateController@authenticate');
-
     // Sample
     Route::post('test/sample', 'WelcomeController@sample');
+
+    // Auth
+    Route::post('authenticate', 'AuthenticateController@authenticate');
+
+    // Memories
+    Route::resource('memory', 'MemoryController', ['except' => ['create', 'edit']]);
 
 });

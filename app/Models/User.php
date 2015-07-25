@@ -32,4 +32,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    /**
+     * Memories relation.
+     *
+     * @return Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function memories()
+    {
+        return $this->HasMany('App\Models\Memory');
+    }
 }

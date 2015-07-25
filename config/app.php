@@ -145,11 +145,6 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         /**
-         * Own.
-         */
-        App\Providers\ResponseMacroServiceProvider::class,
-
-        /**
          * 3rd party.
          */
         Barryvdh\Debugbar\ServiceProvider::class,
